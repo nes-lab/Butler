@@ -1,0 +1,7 @@
+
+# see here for details:
+# http://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes
+
+# replace $Id$ in source files
+*.h ident
+*.c ident

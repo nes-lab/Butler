@@ -1,0 +1,110 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="Butler" target="8" version="2">
+  <project Name="Butler">
+    <configuration
+      Name="Common"
+      Placement="Flash"
+      Target="nRF52840_xxAA"
+      arm_architecture="v7EM"
+      arm_core_type="Cortex-M4"
+      arm_endian="Little"
+      arm_fp_abi="Hard"
+      arm_fpu_type="FPv4-SP-D16"
+      arm_interwork="No"
+      arm_linker_heap_size="256"
+      arm_linker_process_stack_size="0"
+      arm_linker_stack_size="256"
+      arm_simulator_memory_simulation_parameter="ROM;0x00000000;0x00100000;RAM;0x20000000;0x00040000"
+      arm_target_debug_interface_type="ADIv5"
+      arm_target_device_name="nRF52840_xxAA"
+      arm_target_interface_type="SWD"
+      asm_generate_listing_file="Yes"
+      c_preprocessor_definitions="NRF52840_XXAA;__nRF_FAMILY;ARM_MATH_CM4;FLASH_PLACEMENT=1;CONFIG_GPIO_AS_PINRESET;GPI_TRACE_MODE=GPI_TRACE_MODE_NO_TRACE;GPI_TRACE_BASE_SELECTION=GPI_TRACE_LOG_STANDARD;GPI_TRACE_BUFFER_ELEMENTS=64;VECTORS_IN_RAM=1"
+      c_user_include_directories="$(ProjectDir)/../butler/CMSIS_4/CMSIS/Include;$(ProjectDir)/../butler/nRF/CMSIS/Device/Include;$(ProjectDir)/mixer/;$(ProjectDir)/../;$(ProjectDir)/../app/;$(ProjectDir)/../butler/"
+      debug_register_definition_file="$(ProjectDir)/nrf52840_Registers.xml"
+      debug_target_connection="J-Link"
+      gcc_debugging_level="None"
+      gcc_entry_point="Reset_Handler"
+      gcc_optimization_level="Level 1"
+      linker_memory_map_file="$(ProjectDir)/nRF52840_xxAA_MemoryMap.xml"
+      linker_output_format="hex"
+      linker_post_build_command=""
+      linker_printf_fmt_level="long"
+      linker_printf_width_precision_supported="Yes"
+      linker_scanf_fmt_level="long"
+      linker_section_placement_file="$(ProjectDir)/flash_placement.xml"
+      macros="DeviceHeaderFile=$(PackagesDir)/nRF/CMSIS/Device/Include/nrf.h;DeviceLibraryIdentifier=M4lf;DeviceSystemFile=$(PackagesDir)/nRF/CMSIS/Device/Source/system_nrf52840.c;DeviceVectorsFile=$(PackagesDir)/nRF/Source/ses_nrf52840_Vectors.s;DeviceFamily=nRF;Target=nRF52840_xxAA;Placement=Flash"
+      post_build_command=""
+      project_directory=""
+      project_type="Executable"
+      target_reset_script="Reset();"
+      target_script_file="$(ProjectDir)/../butler/nRF/Scripts/nRF_Target.js"
+      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
+    <folder Name="App">
+      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
+      <file file_name="main.c" />
+      <file file_name="mixer_config.h" />
+      <file file_name="butler_config.h" />
+    </folder>
+    <configuration
+      Name="PCA10056_Release"
+      c_preprocessor_definitions="GPI_ARCH_PLATFORM=(GPI_ARCH_BOARD_nRF_PCA10056 | GPI_ARCH_CRT_SEGGER1)" />
+    <configuration
+      Name="PCA10059_Release"
+      c_preprocessor_definitions="GPI_ARCH_PLATFORM=(GPI_ARCH_BOARD_nRF_PCA10059 | GPI_ARCH_CRT_SEGGER1)"
+      linker_memory_map_file="$(ProjectDir)/nRF52840_xxAA-dongle_MemoryMap.xml" />
+    <configuration
+      Name="PCA10059_FlockLab_Release"
+      c_preprocessor_definitions="GPI_ARCH_PLATFORM=(GPI_ARCH_BOARD_nRF5_FLOCKLAB | GPI_ARCH_CRT_SEGGER1);TESTBED=2"
+      post_build_command="" />
+    <configuration
+      Name="Debug"
+      c_preprocessor_definitions="GPI_ARCH_PLATFORM=(GPI_ARCH_BOARD_nRF_PCA10056 | GPI_ARCH_CRT_SEGGER1)"
+      gcc_debugging_level="Level 3" />
+    <folder Name="Mixer Sources">
+      <file file_name="mixer/nrf52840/memxor.c" />
+      <file file_name="mixer/nrf52840/mixer_internal.c" />
+      <file file_name="mixer/nrf52840/mixer_transport.c" />
+      <file file_name="mixer/mixer.c" />
+      <file file_name="mixer/mixer_discovery.c" />
+      <file file_name="mixer/mixer_history.c" />
+      <file file_name="mixer/mixer_processing.c" />
+      <file file_name="mixer/mixer_rand.c" />
+      <file file_name="mixer/mixer_request.c" />
+    </folder>
+    <folder Name="Butler Sources">
+      <file file_name="../butler/butler.c" />
+      <file file_name="../butler/butler.h" />
+      <file file_name="../gpi/gpi.c" />
+      <folder Name="System Files">
+        <file file_name="../butler/nRF/Source/ses_nRF_Startup.s" />
+        <file file_name="../butler/nRF/Source/ses_nrf52840_Vectors.s" />
+        <file file_name="../butler/thumb_crt0.s" />
+      </folder>
+      <folder Name="CMSIS Files">
+        <file file_name="../butler/nRF/CMSIS/Device/Include/nrf.h" />
+        <file file_name="../butler/nRF/CMSIS/Device/Source/system_nrf52840.c" />
+      </folder>
+      <folder Name="Script Files">
+        <file file_name="../butler/nRF/Scripts/nRF_Target.js" />
+      </folder>
+    </folder>
+  </project>
+  <configuration
+    Name="Debug"
+    asm_generate_listing_file="Yes"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_enable_all_warnings="Yes"
+    gcc_optimization_level="None" />
+  <configuration Name="PCA10056_Release" />
+  <configuration Name="PCA10059_Release" />
+  <configuration
+    Name="PCA10059_FlockLab_Release"
+    gcc_debugging_level="None"
+    gcc_optimization_level="None" />
+  <configuration
+    Name="Common"
+    gcc_debugging_level="None"
+    gcc_optimization_level="Level 2 for size" />
+</solution>
